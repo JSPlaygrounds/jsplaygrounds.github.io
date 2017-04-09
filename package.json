@@ -8,7 +8,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack",
-    "precommit": "npm run build"
+    "precommit": "npm run build && git add dist/"
   },
   "dependencies": {
     "react": "^15.5.3",
