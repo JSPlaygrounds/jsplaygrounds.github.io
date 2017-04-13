@@ -8,7 +8,7 @@ import {
 export default function Playgrounds({ playgrounds }) {
   return (
     <Card.Group style={{ paddingTop: 50 }}>
-      { playgrounds.map((playground) => (
+      { playgrounds.map(playground => (
         <Card fluid key={playground.name}>
           <Card.Content>
             <Card.Header>

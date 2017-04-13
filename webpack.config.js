@@ -1,6 +1,7 @@
 const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.jsx',
@@ -23,5 +24,11 @@ module.exports = {
       filename: 'index.html',
       injext: 'body',
     }),
+    new CopyWebpackPlugin([
+      {
+        from: 'static/data.json',
+        to: 'dist/data.json',
+      },
+    ]),
   ],
 };

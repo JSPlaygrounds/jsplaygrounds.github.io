@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import {
   Container,
-  Input,
   Header,
+  Dimmer,
+  Loader,
 } from 'semantic-ui-react';
 import Playgrounds from './Playgrounds';
+import SearchBar from './SearchBar';
 
 const playgrounds = [
   {
@@ -14,18 +16,56 @@ const playgrounds = [
   },
 ];
 
-export default function App() {
-  return (
-    <Container style={{ paddingTop: 50 }}>
-      <Header as="h1" textAlign="center">
-        JSPlayground
-      </Header>
-      <Input
-        fluid
-        icon="search"
-        placeholder="Find a playground..."
-      />
-      <Playgrounds playgrounds={playgrounds} />
-    </Container>
-  );
+export default class App extends PureComponent {
+
+  constructor(props) {
+    super(props);
+    this.handleFilterTextInput = this.handleFilterTextInput.bind(this);
+    this.state = {
+      filterText: '',
+    };
+  }
+
+  componentDidMount() {
+    fetch('/dist/data.json')
+      .then(res => res.json())
+      .then(data => this.setState({
+        playgrounds: data,
+      }));
+  }
+
+  isLoading() {
+    return !this.state.playgrounds;
+  }
+
+  handleFilterTextInput(filterText) {
+    this.setState({ filterText });
+  }
+
+  render() {
+    return (
+      <Container style={{ paddingTop: 50 }}>
+        <Header as="h1" textAlign="center">
+          JSPlayground
+        </Header>
+        {
+          this.isLoading() ?
+            <Dimmer active inverted>
+              <Loader size="medium">Loading</Loader>
+            </Dimmer>
+          :
+            <div>
+              <SearchBar
+                onFilterTextInput={this.handleFilterTextInput}
+                filterText={this.state.filterText}
+              />
+              <Playgrounds
+                playgrounds={playgrounds}
+                filterText={this.state.filterText}
+              />
+            </div>
+        }
+      </Container>
+    );
+  }
 }
