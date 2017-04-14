@@ -26335,12 +26335,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var playgrounds = [{
-  name: 'lodash',
-  playground: 'lodash',
-  description: 'A playground showcasing lodash'
-}];
-
 var App = function (_PureComponent) {
   _inherits(App, _PureComponent);
 
@@ -26364,10 +26358,8 @@ var App = function (_PureComponent) {
       var path =  true ? 'dist' : 'data';
       fetch('/' + path + '/playgrounds.json').then(function (res) {
         return res.json();
-      }).then(function (data) {
-        return _this2.setState({
-          playgrounds: data
-        });
+      }).then(function (playgrounds) {
+        return _this2.setState({ playgrounds: playgrounds });
       });
     }
   }, {
@@ -26383,6 +26375,11 @@ var App = function (_PureComponent) {
   }, {
     key: 'render',
     value: function render() {
+      var _state = this.state,
+          filterText = _state.filterText,
+          playgrounds = _state.playgrounds;
+
+
       return _react2.default.createElement(
         _semanticUiReact.Container,
         { style: { paddingTop: 50 } },
@@ -26404,11 +26401,11 @@ var App = function (_PureComponent) {
           null,
           _react2.default.createElement(_SearchBar2.default, {
             onFilterTextInput: this.handleFilterTextInput,
-            filterText: this.state.filterText
+            filterText: filterText
           }),
           _react2.default.createElement(_Playgrounds2.default, {
             playgrounds: playgrounds,
-            filterText: this.state.filterText
+            filterText: filterText
           })
         )
       );

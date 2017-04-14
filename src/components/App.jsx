@@ -8,14 +8,6 @@ import {
 import Playgrounds from './Playgrounds';
 import SearchBar from './SearchBar';
 
-const playgrounds = [
-  {
-    name: 'lodash',
-    playground: 'lodash',
-    description: 'A playground showcasing lodash',
-  },
-];
-
 export default class App extends PureComponent {
 
   constructor(props) {
@@ -30,9 +22,7 @@ export default class App extends PureComponent {
     const path = process.env.NODE_ENV === 'production' ? 'dist' : 'data';
     fetch(`/${path}/playgrounds.json`)
       .then(res => res.json())
-      .then(data => this.setState({
-        playgrounds: data,
-      }));
+      .then(playgrounds => this.setState({ playgrounds }));
   }
 
   isLoading() {
@@ -44,6 +34,11 @@ export default class App extends PureComponent {
   }
 
   render() {
+    const {
+      filterText,
+      playgrounds,
+    } = this.state;
+
     return (
       <Container style={{ paddingTop: 50 }}>
         <Header as="h1" textAlign="center">
@@ -58,11 +53,11 @@ export default class App extends PureComponent {
             <div>
               <SearchBar
                 onFilterTextInput={this.handleFilterTextInput}
-                filterText={this.state.filterText}
+                filterText={filterText}
               />
               <Playgrounds
                 playgrounds={playgrounds}
-                filterText={this.state.filterText}
+                filterText={filterText}
               />
             </div>
         }
