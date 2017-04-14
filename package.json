@@ -6,7 +6,7 @@
   "author": "thuey <thuey100@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "NODE_ENV=development webpack-dev-server",
     "build": "webpack",
     "precommit": "npm run build && git add dist/"
   },
