@@ -26362,7 +26362,7 @@ var App = function (_PureComponent) {
       var _this2 = this;
 
       var path =  true ? 'dist' : 'data';
-      fetch('/' + path + '/plagrounds.json').then(function (res) {
+      fetch('/' + path + '/playgrounds.json').then(function (res) {
         return res.json();
       }).then(function (data) {
         return _this2.setState({

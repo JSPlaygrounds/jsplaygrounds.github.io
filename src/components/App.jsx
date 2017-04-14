@@ -28,7 +28,7 @@ export default class App extends PureComponent {
 
   componentDidMount() {
     const path = process.env.NODE_ENV === 'production' ? 'dist' : 'data';
-    fetch(`/${path}/plagrounds.json`)
+    fetch(`/${path}/playgrounds.json`)
       .then(res => res.json())
       .then(data => this.setState({
         playgrounds: data,
