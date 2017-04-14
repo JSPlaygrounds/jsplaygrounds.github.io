@@ -50,7 +50,7 @@ export default class App extends PureComponent {
               <Loader size="medium">Loading</Loader>
             </Dimmer>
           :
-            <div>
+            <div style={{ paddingTop: 50 }}>
               <SearchBar
                 onFilterTextInput={this.handleFilterTextInput}
                 filterText={filterText}
