@@ -4,10 +4,6 @@ import { playgroundShape } from '../../utils/propShapes';
 
 function getData(props) {
   const { playground: { name }, ...content } = props;
-  console.log({
-    title: name,
-    ...content,
-  });
   return JSON.stringify({
     title: name,
     ...content,

@@ -26575,7 +26575,6 @@ var LaunchForm = function (_PureComponent) {
 
         var url = _constants.REGISTRY_ENDPOINT + '/' + path + '/playground.' + contentType;
         return fetch(url).then(function (response) {
-          console.log(response);
           if (response.status >= 200 && response.status < 300) {
             return response.text();
           }
@@ -27073,9 +27072,6 @@ function getData(props) {
   var name = props.playground.name,
       content = _objectWithoutProperties(props, ['playground']);
 
-  console.log(_extends({
-    title: name
-  }, content));
   return JSON.stringify(_extends({
     title: name
   }, content));
