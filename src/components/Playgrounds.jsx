@@ -3,11 +3,15 @@ import PropTypes from 'prop-types';
 import {
   Container,
   Card,
+  Dimmer,
+  Loader,
 } from 'semantic-ui-react';
 import Fuse from 'fuse.js';
 import throttle from 'lodash.throttle';
 import Playground from './Playground';
 import Pagination from './Pagination';
+import LaunchForm from './LaunchForm';
+import { playgroundShape } from '../utils/propShapes';
 
 const PAGE_SIZE = 20;
 
@@ -17,6 +21,8 @@ export default class Playgrounds extends PureComponent {
 
     this.filterPlaygrounds = throttle(this.filterPlaygrounds, 100);
     this.onPageChange = this.onPageChange.bind(this);
+    this.onLaunch = this.onLaunch.bind(this);
+    this.onDidLaunch = this.onDidLaunch.bind(this);
 
     this.state = {
       filteredPlaygrounds: props.playgrounds,
@@ -26,6 +32,22 @@ export default class Playgrounds extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     this.filterPlaygrounds(nextProps);
+  }
+
+  onLaunch(playgroundToLaunch, launchType) {
+    this.setState({
+      isLaunching: true,
+      playgroundToLaunch,
+      launchType,
+    });
+  }
+
+  onDidLaunch() {
+    this.setState({
+      isLaunching: false,
+      playgroundToLaunch: null,
+      launchType: null,
+    });
   }
 
   onPageChange(newPage) {
@@ -49,44 +71,58 @@ export default class Playgrounds extends PureComponent {
     const {
       filteredPlaygrounds,
       currentPage,
+      isLaunching,
+      playgroundToLaunch,
+      launchType,
     } = this.state;
+    const totalPages = Math.ceil(filteredPlaygrounds.length / PAGE_SIZE);
 
-    if (!filteredPlaygrounds.length) {
+    if (filteredPlaygrounds.length === 0) {
       return (
         <Container textAlign="center" style={{ paddingTop: 50 }}>
           No playgrounds found :(
         </Container>
       );
     }
-
-    const totalPages = filteredPlaygrounds.length / PAGE_SIZE;
     return (
       <div>
+        { isLaunching &&
+          <div>
+            <LaunchForm
+              onDidLaunch={this.onDidLaunch}
+              playground={playgroundToLaunch}
+              type={launchType}
+            />
+            <Dimmer active inverted>
+              <Loader size="medium">Launching...</Loader>
+            </Dimmer>
+          </div>
+        }
         <Card.Group style={{ paddingTop: 50 }}>
           { filteredPlaygrounds.map((playground, index) => {
             if (index + 1 >= currentPage && index + 1 < currentPage + PAGE_SIZE) {
-              return <Playground key={playground.name} playground={playground} />;
+              return (
+                <Playground
+                  key={playground.name}
+                  playground={playground}
+                  onLaunch={this.onLaunch}
+                />
+              );
             }
             return null;
           })}
         </Card.Group>
-        { totalPages > 1 &&
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={this.onPageChange}
-          />
-        }
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={this.onPageChange}
+        />
       </div>
     );
   }
 }
 
 Playgrounds.propTypes = {
-  playgrounds: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string,
-    playground: PropTypes.string,
-    description: PropTypes.string,
-  })).isRequired,
+  playgrounds: PropTypes.arrayOf(playgroundShape).isRequired,
   filterText: PropTypes.string.isRequired, // eslint-disable-line react/no-unused-prop-types
 };

@@ -4,8 +4,10 @@ import {
   Card,
   Image,
 } from 'semantic-ui-react';
+import { playgroundShape } from '../utils/propShapes';
+import codePlaygrounds from '../utils/codePlaygrounds';
 
-export default function Playground({ playground }) {
+export default function Playground({ playground, onLaunch }) {
   return (
     <Card fluid key={playground.name}>
       <Card.Content>
@@ -17,38 +19,21 @@ export default function Playground({ playground }) {
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        Launch with:
-        <Image
-          spaced
-          src="https://blog.codepen.io/wp-content/uploads/2012/06/Button-Fill-Black-Large.png"
-          style={{
-            maxWidth: 30,
-            maxHeight: 30,
-          }}
-        />
-        <Image
-          src="http://doc.jsfiddle.net/_downloads/jsfiddle-logo.png"
-          style={{
-            maxWidth: 40,
-            maxHeight: 40,
-          }}
-        />
-        <Image
-          src="https://static.jsbin.com/images/dave.min.svg"
-          style={{
-            maxWidth: 30,
-            maxHeight: 30,
-          }}
-        />
+        Launch with: &nbsp;
+        { codePlaygrounds.map(({ type, icon }) => (
+          <Image
+            key={type}
+            className="clickable"
+            {...icon}
+            onClick={() => onLaunch(playground, type)}
+          />
+        ))}
       </Card.Content>
     </Card>
   );
 }
 
 Playground.propTypes = {
-  playground: PropTypes.shape({
-    name: PropTypes.string,
-    playground: PropTypes.string,
-    description: PropTypes.string,
-  }).isRequired,
+  playground: playgroundShape.isRequired,
+  onLaunch: PropTypes.func.isRequired,
 };

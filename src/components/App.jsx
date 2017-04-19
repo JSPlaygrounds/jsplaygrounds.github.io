@@ -42,12 +42,12 @@ export default class App extends PureComponent {
     return (
       <Container style={{ paddingTop: 50 }}>
         <Header as="h1" textAlign="center">
-          JSPlayground
+          JSPlaygrounds
         </Header>
         {
           this.isLoading() ?
             <Dimmer active inverted>
-              <Loader size="medium">Loading</Loader>
+              <Loader size="medium">Loading...</Loader>
             </Dimmer>
           :
             <div style={{ paddingTop: 50 }}>
