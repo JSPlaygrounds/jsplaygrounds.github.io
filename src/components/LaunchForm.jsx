@@ -20,7 +20,8 @@ export default class LaunchForm extends PureComponent {
       const url = `${REGISTRY_ENDPOINT}/${path}/playground.${contentType}`;
       return fetch(url)
         .then((response) => {
-          if (response.status >= 200 && response.stats < 300) {
+          console.log(response);
+          if (response.status >= 200 && response.status < 300) {
             return response.text();
           }
           return '';

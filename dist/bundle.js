@@ -26575,7 +26575,8 @@ var LaunchForm = function (_PureComponent) {
 
         var url = _constants.REGISTRY_ENDPOINT + '/' + path + '/playground.' + contentType;
         return fetch(url).then(function (response) {
-          if (response.status >= 200 && response.stats < 300) {
+          console.log(response);
+          if (response.status >= 200 && response.status < 300) {
             return response.text();
           }
           return '';
@@ -27072,6 +27073,9 @@ function getData(props) {
   var name = props.playground.name,
       content = _objectWithoutProperties(props, ['playground']);
 
+  console.log(_extends({
+    title: name
+  }, content));
   return JSON.stringify(_extends({
     title: name
   }, content));
@@ -27156,7 +27160,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 /* eslint-disable import/prefer-default-export */
-var REGISTRY_ENDPOINT = exports.REGISTRY_ENDPOINT = 'https://raw.githubusercontent.com/JSPlaygrounds/JSPlaygrounds/master';
+var REGISTRY_ENDPOINT = exports.REGISTRY_ENDPOINT = 'https://raw.githubusercontent.com/JSPlaygrounds/JSPlaygrounds/master/playgrounds';
 
 /***/ }),
 /* 436 */
