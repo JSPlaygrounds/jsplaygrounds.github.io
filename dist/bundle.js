@@ -26423,7 +26423,7 @@ var App = function (_PureComponent) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      var path =  true ? 'dist' : 'data';
+      var path =  true ? 'dist/data' : 'data';
       fetch('/' + path + '/playgrounds.json').then(function (res) {
         return res.json();
       }).then(function (playgrounds) {
