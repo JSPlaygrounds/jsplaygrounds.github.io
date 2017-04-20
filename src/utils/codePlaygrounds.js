@@ -1,5 +1,6 @@
 import {
   CodePen,
+  JSFiddle,
 } from '../components/forms';
 
 export default [
@@ -24,6 +25,8 @@ export default [
         maxHeight: 40,
       },
     },
+    formComponent: JSFiddle,
+    endpoint: 'http://jsfiddle.net/api/post/library/pure/',
   },
   {
     type: 'JSBIN',
