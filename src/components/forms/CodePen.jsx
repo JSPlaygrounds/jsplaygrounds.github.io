@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { playgroundShape } from '../../utils/propShapes';
 
 function getData(props) {
-  const { playground: { name }, ...content } = props;
+  const { playground: { name, description }, ...content } = props;
   return JSON.stringify({
     title: name,
+    description,
     ...content,
   });
 }

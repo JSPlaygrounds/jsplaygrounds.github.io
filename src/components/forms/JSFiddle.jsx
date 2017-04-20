@@ -2,12 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { playgroundShape } from '../../utils/propShapes';
 
-export default function JSFiddle({ html, js, css }) {
+export default function JSFiddle({ html, js, css, playground }) {
+  const {
+    title,
+    description,
+  } = playground;
+
   return (
     <div>
-      <textarea name="html">{html}</textarea>
-      <textarea name="js">{js}</textarea>
-      <textarea name="css">{css}</textarea>
+      <input type="hidden" name="title" value={title} />
+      <input type="hidden" name="description" value={description} />
+      <input type="hidden" name="html" value={html} />
+      <input type="hidden" name="js" value={js} />
+      <input type="hidden" name="css" value={css} />
     </div>
   );
 }

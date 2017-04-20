@@ -14013,15 +14013,6 @@ exports.default = [{
   },
   formComponent: _forms.JSFiddle,
   endpoint: 'http://jsfiddle.net/api/post/library/pure/'
-}, {
-  type: 'JSBIN',
-  icon: {
-    src: 'https://static.jsbin.com/images/dave.min.svg',
-    style: {
-      maxWidth: 30,
-      maxHeight: 30
-    }
-  }
 }];
 
 /***/ }),
@@ -27071,11 +27062,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 function getData(props) {
-  var name = props.playground.name,
+  var _props$playground = props.playground,
+      name = _props$playground.name,
+      description = _props$playground.description,
       content = _objectWithoutProperties(props, ['playground']);
 
   return JSON.stringify(_extends({
-    title: name
+    title: name,
+    description: description
   }, content));
 }
 
@@ -27127,26 +27121,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function JSFiddle(_ref) {
   var html = _ref.html,
       js = _ref.js,
-      css = _ref.css;
+      css = _ref.css,
+      playground = _ref.playground;
+  var title = playground.title,
+      description = playground.description;
+
 
   return _react2.default.createElement(
     'div',
     null,
-    _react2.default.createElement(
-      'textarea',
-      { name: 'html' },
-      html
-    ),
-    _react2.default.createElement(
-      'textarea',
-      { name: 'js' },
-      js
-    ),
-    _react2.default.createElement(
-      'textarea',
-      { name: 'css' },
-      css
-    )
+    _react2.default.createElement('input', { type: 'hidden', name: 'title', value: title }),
+    _react2.default.createElement('input', { type: 'hidden', name: 'description', value: description }),
+    _react2.default.createElement('input', { type: 'hidden', name: 'html', value: html }),
+    _react2.default.createElement('input', { type: 'hidden', name: 'js', value: js }),
+    _react2.default.createElement('input', { type: 'hidden', name: 'css', value: css })
   );
 }
 

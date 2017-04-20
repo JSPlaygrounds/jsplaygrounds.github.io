@@ -28,14 +28,14 @@ export default [
     formComponent: JSFiddle,
     endpoint: 'http://jsfiddle.net/api/post/library/pure/',
   },
-  {
-    type: 'JSBIN',
-    icon: {
-      src: 'https://static.jsbin.com/images/dave.min.svg',
-      style: {
-        maxWidth: 30,
-        maxHeight: 30,
-      },
-    },
-  },
+  // {
+  //   type: 'JSBIN',
+  //   icon: {
+  //     src: 'https://static.jsbin.com/images/dave.min.svg',
+  //     style: {
+  //       maxWidth: 30,
+  //       maxHeight: 30,
+  //     },
+  //   },
+  // },
 ];
