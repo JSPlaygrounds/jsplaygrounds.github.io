@@ -27131,7 +27131,6 @@ function JSFiddle(_ref) {
       externalCSS = playground.externalCSS;
 
   var resources = externalJS.concat(externalCSS);
-
   return _react2.default.createElement(
     'div',
     null,
@@ -27140,7 +27139,7 @@ function JSFiddle(_ref) {
     _react2.default.createElement('input', { type: 'hidden', name: 'html', value: html }),
     _react2.default.createElement('input', { type: 'hidden', name: 'js', value: js }),
     _react2.default.createElement('input', { type: 'hidden', name: 'css', value: css }),
-    _react2.default.createElement('input', { type: 'hidden', name: 'resources', value: resources.join('') })
+    _react2.default.createElement('input', { type: 'hidden', name: 'resources', value: resources.join(',') })
   );
 }
 
