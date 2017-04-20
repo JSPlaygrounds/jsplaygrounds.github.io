@@ -3,10 +3,18 @@ import PropTypes from 'prop-types';
 import { playgroundShape } from '../../utils/propShapes';
 
 function getData(props) {
-  const { playground: { name, description }, ...content } = props;
+  const { playground, ...content } = props;
+  const {
+    name,
+    description,
+    externalCSS,
+    externalJS,
+  } = playground;
   return JSON.stringify({
     title: name,
     description,
+    css_external: externalCSS.join(';'),
+    js_external: externalJS.join(';'),
     ...content,
   });
 }
