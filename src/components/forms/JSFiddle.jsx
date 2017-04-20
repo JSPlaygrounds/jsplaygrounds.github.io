@@ -6,7 +6,10 @@ export default function JSFiddle({ html, js, css, playground }) {
   const {
     title,
     description,
+    externalJS,
+    externalCSS,
   } = playground;
+  const resources = externalJS.concat(externalCSS);
 
   return (
     <div>
@@ -15,6 +18,7 @@ export default function JSFiddle({ html, js, css, playground }) {
       <input type="hidden" name="html" value={html} />
       <input type="hidden" name="js" value={js} />
       <input type="hidden" name="css" value={css} />
+      <input type="hidden" name="resources" value={resources.join('')} />
     </div>
   );
 }

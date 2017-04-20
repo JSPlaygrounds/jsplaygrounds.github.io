@@ -5,4 +5,6 @@ export const playgroundShape = PropTypes.shape({
   name: PropTypes.string,
   path: PropTypes.string,
   description: PropTypes.string,
+  externalJS: PropTypes.array,
+  externalCSS: PropTypes.array,
 });

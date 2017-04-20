@@ -4056,7 +4056,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var playgroundShape = exports.playgroundShape = _propTypes2.default.shape({
   name: _propTypes2.default.string,
   path: _propTypes2.default.string,
-  description: _propTypes2.default.string
+  description: _propTypes2.default.string,
+  externalJS: _propTypes2.default.array,
+  externalCSS: _propTypes2.default.array
 }); /* eslint-disable import/prefer-default-export */
 
 /***/ }),
@@ -27124,8 +27126,11 @@ function JSFiddle(_ref) {
       css = _ref.css,
       playground = _ref.playground;
   var title = playground.title,
-      description = playground.description;
+      description = playground.description,
+      externalJS = playground.externalJS,
+      externalCSS = playground.externalCSS;
 
+  var resources = externalJS.concat(externalCSS);
 
   return _react2.default.createElement(
     'div',
@@ -27134,7 +27139,8 @@ function JSFiddle(_ref) {
     _react2.default.createElement('input', { type: 'hidden', name: 'description', value: description }),
     _react2.default.createElement('input', { type: 'hidden', name: 'html', value: html }),
     _react2.default.createElement('input', { type: 'hidden', name: 'js', value: js }),
-    _react2.default.createElement('input', { type: 'hidden', name: 'css', value: css })
+    _react2.default.createElement('input', { type: 'hidden', name: 'css', value: css }),
+    _react2.default.createElement('input', { type: 'hidden', name: 'resources', value: resources.join('') })
   );
 }
 
